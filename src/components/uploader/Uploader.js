@@ -4,119 +4,91 @@ import './Uploader.scss';
 
 import PropTypes from 'prop-types';
 
-
-import {CheckURL} from '../Utils';
-
-
-
-
+import { CheckURL } from '../Utils';
 
 export default class FormLoadImage extends React.PureComponent {
-
   constructor(props) {
-
     super(props);
-    
+
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.inputRef = React.createRef();  
+    this.inputRef = React.createRef();
 
     this.state = {
-
-       errorMsg:""
-
-    }   
-
+      errorMsg: '',
+    };
   }
-
-  
 
   handleSubmit(event) {
-
     event.preventDefault();
 
-    let url=this.inputRef.current.value;
+    let url = this.inputRef.current.value;
 
     CheckURL(url, this.props.arrExtnsFile)
+      .then((data) => {
+        if (data === 'img') {
+          this.props.getURL([{ url }]);
+        }
 
-    .then( data =>{ 
+        if (data === 'json') {
+          fetch(url)
+            .then((res) => res.json())
 
-          if (data==='img') {
+            .then((images) => {
+              this.props.getURL(images.images);
+            })
 
-            this.props.getURL([{url}])
+            .catch(() => {
+              this.setState({ errorMsg: 'Error loading file:' + url });
+            });
+        }
 
-          }
+        this.setState({ errorMsg: '' });
+      })
 
-          if (data==='json') {
-
-            fetch(url)
-
-            .then(res => res.json())
-
-            .then( images => {this.props.getURL(images.images)})
-
-            .catch( error => {this.setState({errorMsg:'Error loading file:'+url})});  
-
-          }
-
-          this.setState({errorMsg:''})
-
-        })
-
-    .catch(error=>this.setState({errorMsg:error}));  
-  
+      .catch((error) => this.setState({ errorMsg: error }));
   }
 
-  componentDidMount () {
-
+  componentDidMount() {
     this.inputRef.current.focus();
-
-   } 
+  }
 
   render() {
+    console.log('RENDER-UPLOADER');
 
-    console.log("RENDER-UPLOADER");
-
-    
-
-    return(
-
+    return (
       <div className="uploader">
-    
-      <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
+          <label id="expLabel" htmlFor="imgURL">
+            Put image or json url:
+          </label>
+          <br />
 
-        <label id="expLabel"  htmlFor="imgURL">Put image or  json url:</label><br/>
+          <input
+            type="text"
+            ref={this.inputRef}
+            id="imgURL"
+            aria-labelledby="expLabel expDesc"
+            placeholder="*.json/ *.jpg/ *.jpeg/ *.png"
+          />
 
-        <input
+          <button type="submit" className="submitButton">
+            UPLOAD
+          </button>
 
-          type="text"
-
-          ref={this.inputRef}
-
-          id="imgURL"
-
-          aria-labelledby="expLabel expDesc"
-
-          placeholder="*.json/ *.jpg/ *.jpeg/ *.png"  
-
-        />
-
-       <button type="submit" className="submitButton">UPLOAD</button>
-
-       <div id="expDes"><span id="expDes_" tabIndex="-1">{this.state.errorMsg}</span></div>
-
-      </form>
-    </div>
-      );
-
+          <div id="expDes">
+            <span id="expDes_" tabIndex="-1">
+              {this.state.errorMsg}
+            </span>
+          </div>
+        </form>
+      </div>
+    );
   }
 }
 
-
 FormLoadImage.propTypes = {
+  getURL: PropTypes.func,
 
-  getURL : PropTypes.func,
-
-  arrExtnsFile : PropTypes.object
-
-}
+  arrExtnsFile: PropTypes.object,
+};

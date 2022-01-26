@@ -1,105 +1,94 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 
-import  './Popup.scss';
+import './Popup.scss';
 
+import PropTypes from 'prop-types';
 
-class App extends PureComponent{
-
+class Popup extends PureComponent {
   constructor(props) {
- 
-    super(props); 
+    super(props);
 
     this.ref = React.createRef();
 
     this.state = {
+      innerHeight: 0,
 
-        innerHeight:0,
+      innerWidth: 0,
+    };
+  }
 
-        innerWidth:0
-    }
-}
+  sizePopUp = () => {
+    let widthPopup = this.props.popImageWidth;
 
-sizePopUp=()=>{
+    let heightPopup = this.props.popImageHeight;
 
-    let widthPopup=this.props.popImageWidth;
+    if (widthPopup > this.state.innerWidth * 0.9) {
+      widthPopup = this.state.innerWidth * 0.9;
 
-    let heightPopup=this.props.popImageHeight;
-
-    if (widthPopup>(this.state.innerWidth*0.9)) {
-
-        widthPopup=this.state.innerWidth*0.9;
-
-        heightPopup=widthPopup*(this.props.popImageHeight/this.props.popImageWidth);
-
-    } 
-
-    if (heightPopup>(this.state.innerHeight*0.9)) {
-    
-        heightPopup=this.state.innerHeight*0.9;
-    
-        widthPopup=heightPopup*(this.props.popImageWidth/this.props.popImageHeight);
-    
+      heightPopup =
+        widthPopup * (this.props.popImageHeight / this.props.popImageWidth);
     }
 
-    return {width:widthPopup, height:heightPopup};
+    if (heightPopup > this.state.innerHeight * 0.9) {
+      heightPopup = this.state.innerHeight * 0.9;
 
-}
+      widthPopup =
+        heightPopup * (this.props.popImageWidth / this.props.popImageHeight);
+    }
 
-componentDidMount() {
+    return { width: widthPopup, height: heightPopup };
+  };
 
+  componentDidMount() {
     if (this.ref.current) {
+      this.setState({ innerWidth: this.ref.current.clientWidth });
 
-        this.setState({innerWidth: this.ref.current.clientWidth});  
+      this.setState({ innerHeight: this.ref.current.clientHeight });
+    }
+  }
 
-        this.setState({innerHeight: this.ref.current.clientHeight});
+  render() {
+    console.log('RENDER-POPUP');
 
-    }  
-
- }
-
- 
-
-render() {console.log("RENDER-POPUP");
-
-    let styleImg=this.sizePopUp();
+    let styleImg = this.sizePopUp();
 
     return (
+      <div className="popupParent" ref={this.ref}>
+        <div
+          className="popupImage"
+          style={{ width: styleImg.width, height: styleImg.height }}
+        >
+          <button
+            className="imageClosingButton"
+            onClick={this.props.closePopup}
+          >
+            X
+          </button>
 
-        <div className="popupParent" ref={this.ref}>
-     
-           <div className="popupImage" style={{width:styleImg.width, height:styleImg.height}}>
-        
-                <button
-        
-                    className="imageClosingButton"
-                
-                    onClick={this.props.closePopup}>
-                
-                    X
-                
-                </button>
-                
-                <button
-                
-                    className="imageDeletingButton"
+          <button
+            className="imageDeletingButton"
+            onClick={this.props.deletePopup}
+          >
+            Delete
+          </button>
 
-                    onClick={this.props.deletePopup}>
-
-                    Delete
-
-                </button>
-                 
-                    <img src={this.props.popupImageUrl} alt="preloader" ></img>
-                
-            </div>
-       
+          <img src={this.props.popupImageUrl} alt="preloader"></img>
         </div>
-
+      </div>
     );
-
-    }
-
+  }
 }
 
+Popup.propTypes = {
+  popupImageUrl: PropTypes.array,
 
-export default App;
+  closePopup: PropTypes.func,
+
+  deletePopup: PropTypes.func,
+
+  popImageWidth: PropTypes.number,
+
+  popImageHeight: PropTypes.number,
+};
+
+export default Popup;

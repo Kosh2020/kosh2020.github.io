@@ -1,0 +1,136 @@
+$width-button:20%;
+ .uploader {
+   padding:5px;
+   margin-top: 5px;
+
+   form{
+     top:calc(80% - 50px - 50px);
+     width:100%;
+     input{
+       width:calc(100% - #{
+        $width-button
+      }
+       - 15px);
+       padding: 5px;
+       border: 1px solid rgba(25, 118, 210, 0.5);
+       border-radius: 3px;
+       -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,0);
+       box-shadow: 0 0 1px 1px rgba(0,0,0,0);
+       -webkit-transition: .17s linear;
+       -o-transition: .17s linear;
+       transition: .17s linear;
+       height: 1em;
+       margin: 5px 5px 3px 5px;
+       padding: 17px 14px;
+       vertical-align: middle;
+       &:focus {
+         outline: none;
+         -webkit-box-shadow: 0 0 1px 1px #4d90f0;
+         box-shadow: 0 0 1px 1px #4d90f0;
+      }
+       &:focus::-moz-placeholder {
+         color: transparent;
+      }
+       &:focus::-webkit-input-placeholder {
+         color: transparent;
+      }
+       &::-webkit-input-placeholder {
+         color: #767676;
+         opacity: 1;
+      }
+       &:-moz-placeholder {
+        /* Firefox 18- */
+         color: #767676;
+         opacity: 1;
+      }
+       &::-moz-placeholder {
+        /* Firefox 19+ */
+         color: #767676;
+         opacity: 1;
+      }
+       &:-ms-input-placeholder {
+         color: #767676;
+         opacity: 1;
+      }
+    }
+     label{
+       margin-right:10px;
+       margin-left:5px;
+    }
+     #expDes{
+       margin-left:5px;      
+       width:100%;       
+    }
+     #expDes_{
+       color:red;
+    }
+
+
+     button{
+       width:$width-button;
+       -webkit-box-align: center;
+       -ms-flex-align: center;
+       align-items: center;
+       -webkit-box-pack: center;
+       -ms-flex-pack: center;
+       justify-content: center;
+       -webkit-tap-highlight-color: transparent;
+       background-color: transparent;
+       outline: 0px;
+       margin-top: 5px;
+       cursor: pointer;
+       -webkit-user-select: none;
+       -moz-user-select: none;
+       -ms-user-select: none;
+       user-select: none;
+       vertical-align: middle;
+       -webkit-appearance: none;
+       -moz-appearance: none;
+       appearance: none;
+       text-decoration: none;
+       font-family: Roboto, Helvetica, Arial, sans-serif;
+       font-weight: 500;
+       font-size: 0.875rem;
+       line-height: 1.75;
+       letter-spacing: 0.02857em;
+       text-transform: uppercase;
+       min-width: 64px;
+       padding: 5px 1px;
+       border-radius: 4px;
+       -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+       transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+       -o-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+       transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+       transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+       border: 1px solid rgba(25, 118, 210, 0.5);
+       color: rgb(25, 118, 210);
+       position:relative;
+       float: right;
+       margin-right:5px;
+       &.raised{
+         background: red;
+         -webkit-box-shadow: 0px 1px 1px red;
+         box-shadow: 0px 1px 1px red;
+      }
+       &.active{
+         background: red;
+         -webkit-box-shadow: 0px 1px 1px red;
+         box-shadow: 0px 1px 1px red;
+      }
+    }
+  }
+}
+ @media only screen and (max-width: 425px) {
+   .uploader {
+     form{
+       height: 100px;
+       input{
+         width:calc(100% - 10px);
+      }
+       button{
+         width:$width-button+10%;
+      }
+    }
+  }
+}
+ 
