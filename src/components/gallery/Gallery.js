@@ -1,44 +1,81 @@
 import React from 'react';
 
-import './Gallery.scss';
+import './gallery.scss';
 
 import PropTypes from 'prop-types';
 
-import { PreviewSize } from '../PreviewSize';
+//import { PreviewSize } from '../preview-size';
 
-import { FileAndImageSize } from '../Utils';
+import { ImageContainer }   from '../image-container/image-container';
 
-import Preloader from '../preloader/Preloader';
+import { FileAndImageSize } from '../utils';
 
-import Popup from '../popup/Popup';
+import Preloader from '../preloader/preloader';
+
+import Popup from '../popup/popup';
+
+
+
+import {withRouter} from 'react-router-dom';
+
+/*class Image extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.ref = React.createRef();
+
+    this.state = {
+      isVisible: false,
+    }
+ }
+  componentDidMount(){
+    useIntersectionObserver({
+      target:this.ref,
+      onIntersect:([{ isIntersecting }], observerElement) =>{
+        if (isIntersecting){
+          this.state.setState({isVisible:true});
+          observerElement.unobserve(this.ref.current);
+        }
+      }
+    })
+  } 
+
+  render() {  
+  
+/*const Image=(props)=> {
+  const item=props;
+  const ref = React.createRef();
+  const [isVisible,setIsVisible] = React.useState(false);
+  useIntersectionObserver({
+    target:ref,
+    onIntersect:([{ isIntersecting }], observerElement) =>{
+      if (isIntersecting){
+        setIsVisible(true);
+        observerElement.unobserve(ref.current);
+      }
+    }
+  })*/
+
+  //const isVisible=true;
+/*  let i=this.props;
+  return (
+      {i}
+    );
+}
+}
 
 const Images = (props) => {
   let imageList_ = props.imageList;
 
-  if (imageList_.length === 0) {
+  if ((imageList_.length === 0)&&(!(props.loading))) {
     return <div className="noImages">No images</div>;
   }
 
-  return imageList_.map((item, index) => {
-    return (
-      <div
-        key={index}
-        className="wrap_img"
-        style={{ width: item.w_preview, height: item.h_preview }}
-      >
-        <img
-          alt={item.url}
-          onClick={() =>
-            props.handlePopup(item.src, item.i, item.width, item.height)
-          }
-          src={item.src}
-        />
-      </div>
-    );
-  });
-};
+  return imageList_.map((item,index) =>{<ImageContainer key={index} > it={item}  loading={props.loading}</ImageContainer>});
 
-const MemoImage = React.memo(Images);
+};*/
+
+//const MemoImage = React.memo(Images);
 
 const BadImageMessage = (props) => {
   let badImageList = props.badImageList;
@@ -56,7 +93,7 @@ const BadImageMessage = (props) => {
 
 const MemoBadImageMessage = React.memo(BadImageMessage);
 
-export default class Gallery extends React.PureComponent {
+class Gallery extends React.Component {
   constructor(props) {
     super(props);
 
@@ -64,35 +101,23 @@ export default class Gallery extends React.PureComponent {
 
     this.state = {
       goodImageList: [],
-
       badImageList: [],
-
-      innerWidth: 0,
-
       loading: false,
 
       showModal: false,
 
       popImageUrl: '',
-
       popImageWidth: 0,
-
       popImageHeight: 0,
     };
   }
 
-  updateDimensions = () => {
-    if (this.ref.current) {
-      this.setState({ innerWidth: this.ref.current.clientWidth });
-    }
-  };
+/*
+  updateImageList(ImgListWithoutPrSize,imgListForAdd) {
 
-  updateImageList() {
-    let newImageList = [];
+    let newImageList = [...imgListForAdd]
 
-    let goodImageList = [...this.state.goodImageList];
-
-    goodImageList.forEach((img) => {
+    ImgListWithoutPrSize.forEach((img) => {
       newImageList = PreviewSize(
         newImageList,
         img,
@@ -100,63 +125,78 @@ export default class Gallery extends React.PureComponent {
         this.props.paramsGlr
       );
     });
-
-    this.setState({ goodImageList: newImageList });
+    return newImageList;
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.props.imageList.length > 0 &&
-      prevProps.imageList !== this.props.imageList
-    ) {
+async componentDidUpdate(prevProps, prevState) {
+
+    if ((this.props.imageList.length > 0)&&(prevProps !== this.props))
+    {
       let imgs = this.props.imageList;
 
       let badImageList = [];
 
-      this.setState({ loading: true });
+      this.setState({loading:true})
 
-      imgs.forEach((img) => {
-        FileAndImageSize(img.url, this.props.paramsGlr)
-          .then((img) => {
-            this.setState({
-              goodImageList: PreviewSize(
-                this.state.goodImageList,
-                img,
-                this.state.innerWidth,
-                this.props.paramsGlr
-              ),
-            });
-          })
+      const promises = imgs.map((img) => FileAndImageSize(img.url, this.props.paramsGlr));
 
-          .catch((err) => {
-            badImageList = [...badImageList];
+      const results = await Promise.allSettled(promises);
 
-            badImageList.push(err);
+      const goodImage = results.filter(p => p.status === 'fulfilled').map(function (status) { return status.value});
 
-            this.setState({ badImageList: badImageList });
-          });
-      });
+      const badImage = results.filter(p => p.status === 'rejected').map(function (status) { return status.reason});
 
-      this.setState({ loading: false });
+      let newImageList=[];
+
+      newImageList = this.updateImageList(goodImage,[...this.state.goodImageList])
+         
+      this.setState({
+              goodImageList:newImageList, baddImageList:badImage, loading:false})
+
+      console.log(this.state.goodImageList);
+
     }
 
-    if (
-      this.state.goodImageList.length > 0 &&
-      prevState.innerWidth !== this.state.innerWidth
-    ) {
-      this.updateImageList();
-    }
+    else{
+
+      if (
+        this.state.goodImageList.length > 0 &&
+        prevState.innerWidth !== this.state.innerWidth
+      ) {
+      let newImageList=[];
+
+       newImageList = this.updateImageList(this.state.goodImageList,[]);
+        this.setState({
+              goodImageList:newImageList})
+      }
+    }  
   }
 
+  updateDimensions = () => {
+      if ((this.ref.current)&&(this.ref.current.clientWidth !== this.state.innerWidth)) {
+        this.setState({ innerWidth: this.ref.current.clientWidth });
+      }  
+  };
+
   componentWillUnmount() {
+     this.updateDimensions();
     window.removeEventListener('resize', this.updateDimensions);
   }
 
   componentDidMount() {
     this.updateDimensions();
-
     window.addEventListener('resize', this.updateDimensions);
+
   }
+
+  
+  shouldComponentUpdate(nextProps,nextState){
+    if (((this.state.innerWidth)!==(nextState.innerWidth))&&(nextState.goodImageList.length===0)) {
+      return false
+   }
+   else return true   
+  }
+*/
 
   handlePopup = (url, numb, width, height) => {
     this.setState({
@@ -171,9 +211,8 @@ export default class Gallery extends React.PureComponent {
       popImageHeight: height,
     });
   };
-
-  deleteImg = (i) => {
-    this.setState({ loading: true });
+/*
+  imageListAfterdeleteImg = (i) => {
 
     const imageList = [...this.state.goodImageList];
 
@@ -181,37 +220,38 @@ export default class Gallery extends React.PureComponent {
 
     const afterDeleteItems = imageList.filter((item) => item.i > i);
 
-    let newImageList1 = [];
+    let newImageList = [];
 
     if (afterDeleteItems.length === 0) {
-      newImageList1 = beforeDeleteItems;
+      newImageList = beforeDeleteItems;
     } else {
-      afterDeleteItems.forEach((img) => {
-        newImageList1 = PreviewSize(
-          beforeDeleteItems,
-          img,
-          this.state.innerWidth,
-          this.props.paramsGlr
-        );
+        newImageList = this.updateImageList(afterDeleteItems,beforeDeleteItems)
 
-        beforeDeleteItems = [...newImageList1];
-      });
+
     }
 
-    this.setState({ goodImageList: newImageList1 });
-
-    this.setState({ loading: false });
-  };
+    return newImageList;
+  };*/
 
   deletePopup = () => {
-    this.deleteImg(this.state.popImageNumber);
+
+    this.setState({ loading: true });
+
+    let newImageList = this.props.imageListAfterdeleteImg(this.state.popImageNumber);
 
     this.setState({
+
+
       showModal: !this.state.showModal,
 
       popImageUrl: '',
 
       popImageNumber: null,
+
+    //  goodImageList: newImageList,
+
+      loading: false
+
     });
   };
 
@@ -221,25 +261,14 @@ export default class Gallery extends React.PureComponent {
     );
 
     console.log('RENDER-GALLERY');
-
+    let im=this.props.imageList.map((item,index) =><ImageContainer key={index}  item={item} handlePopup={this.handlePopup}  loading={this.props.loading} />)
     return (
       <div
         className="gallery"
-        style={{ maxWidth: this.props.paramsGlr.widthRowMax }}
-        ref={this.ref}
-      >
-        <span id="expDesc" tabIndex="-1">
-          {this.state.errorMsg}
-          <br />
-          {badImageMessage}
-        </span>
-
+        ref={this.ref}>
         {this.state.loading && <Preloader />}
-
-        <MemoImage
-          imageList={this.state.goodImageList}
-          handlePopup={this.handlePopup}
-        />
+        {im}
+    
 
         {this.state.showModal ? (
           <Popup
@@ -255,14 +284,11 @@ export default class Gallery extends React.PureComponent {
   }
 }
 
-Images.propTypes = {
-  imageList: PropTypes.array,
-
-  handlePopup: PropTypes.func,
-};
+export default withRouter(Gallery);
 
 Gallery.propTypes = {
   imageList: PropTypes.array,
-
+  imageListAfterdeleteImg: PropTypes.func,
   paramsGlr: PropTypes.object,
+  loading: PropTypes.bool
 };

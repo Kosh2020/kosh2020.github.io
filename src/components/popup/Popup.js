@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import './Popup.scss';
+import './popup.scss';
 
 import PropTypes from 'prop-types';
 
@@ -80,7 +80,7 @@ class Popup extends PureComponent {
 }
 
 Popup.propTypes = {
-  popupImageUrl: PropTypes.array,
+  popupImageUrl: PropTypes.string,
 
   closePopup: PropTypes.func,
 

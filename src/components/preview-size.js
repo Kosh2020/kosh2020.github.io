@@ -31,11 +31,6 @@ class Image {
     return (height * this._width) / this._height;
   }
 
-  widthAllImgsForMinHeight() {
-    return (
-      this.widthRowForHeight(this.heightRowMin) + this.wPreviewForMinHeight
-    );
-  }
 }
 
 class Gallery {
@@ -127,6 +122,17 @@ class Gallery {
     return widthImages;
   }
 
+  alignHeightImgsInRow(height) {
+
+    if (this.listImages.length > 0) {
+      this.listImages.forEach((img) => {
+        if (img.row === this.lastRow) {
+        img.h_preview = height; img.w_preview=(height * img.width) / img.height   
+      }})
+    }
+
+  }
+
   stretchLastRow() {
     let ratio = this.widthRow / this.widthLastAllImgsForMinHeight;
 
@@ -180,9 +186,11 @@ export const PreviewSize = (listImages, img, innerWidth, sett) => {
     width: image.width,
   });
 
+gllr.alignHeightImgsInRow(image.hPreview); 
+
   if (
-    gllr.widthAllImgsForMinHeight + image.wPreview <= gllr.widthRow &&
-    gllr.widthAllImgsForMaxHeight + image.wPreview > gllr.widthRow
+    gllr.widthLastAllImgsForMinHeight  <= gllr.widthRow &&
+    gllr.widthLastAllImgsForMaxHeight  > gllr.widthRow
   )
     gllr.stretchLastRow();
 

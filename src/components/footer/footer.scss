@@ -1,0 +1,25 @@
+.footer {
+  color: #ffffff;
+  background-color: #333333;
+  height: 80px;
+  margin-top: -5px;
+  line-height: 80px;
+}
+
+.container-footer {
+  display: flex;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.text-footer {
+  color:white;
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.link-footer {
+  color: #adcce9;
+  display: inline-block;
+  margin-right: 1%;
+}

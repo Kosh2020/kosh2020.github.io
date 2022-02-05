@@ -8,7 +8,7 @@ export const CheckURL = (url, extnsns) =>
       let noCorrectExt = true;
 
       for (const ext of arrExtns) {
-        if (extnsns[ext].includes(extFile)) {
+        if (extnsns[ext].includes(extFile.toLowerCase())) {
           resolve(ext);
 
           noCorrectExt = false;
@@ -30,8 +30,8 @@ export function GetFileExtension(filename) {
   );
 }
 
-export const FileAndImageSize = (url, params) =>
-  new Promise((resolve, reject) => {
+export const FileAndImageSize = (url, params) => {
+  return new Promise((resolve, reject) => {
     fetch(url)
       .then((response) => response.blob())
 
@@ -44,8 +44,6 @@ export const FileAndImageSize = (url, params) =>
 
           img.crossOrigin = 'Anonymous';
 
-          img.src = URL.createObjectURL(blob);
-
           img.addEventListener('load', () => {
             if (
               img.width > params.widthRowMin &&
@@ -57,6 +55,8 @@ export const FileAndImageSize = (url, params) =>
             } else reject(url + '  (incorrect image size)');
           });
 
+          img.src = URL.createObjectURL(blob);
+
           img.addEventListener('error', () => {
             reject(url);
           });
@@ -64,30 +64,5 @@ export const FileAndImageSize = (url, params) =>
       })
 
       .catch(() => reject(url + '  (loading error)'));
-  });
+  })};
 
-/*
-
-
-export const GetImageSiseForGSONImages= async(arrImg) => {
-
-  var goodImageList=[] ;
-
-  var badImageList=[] ;
-
-  const res = await Promise.all(arrImg.map(img => {
-
-    ReactImageSize(img.url)
-
-   .then(({src,width, height }) => (goodImageList.push({src,width, height})))
-
-   .catch(  ({src,width, height }) => (badImageList.push({src,width, height})) )
-
-  }
-
-  ));
-
-
-return {goodImageList,badImageList}
-
-}*/

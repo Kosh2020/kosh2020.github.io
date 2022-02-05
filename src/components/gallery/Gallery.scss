@@ -1,5 +1,5 @@
 .gallery{
-    margin:0 auto;
+    margin:0 auto 40px auto;
     flex-wrap: wrap;
     flex-direction: column;
     flex-flow: row wrap;
@@ -16,13 +16,21 @@
     margin-right: auto;
 }
 
- #expDesc{
+.placeholder{
+    width:99%;
+    height:99%;
+    background: -webkit-linear-gradient(45deg, rgb(237, 242, 241), rgb(220, 227, 227) 40%);
+    background: -moz-linear-gradient(45deg, rgb(237, 242, 241), rgb(220, 227, 227) 40%);
+    background: linear-gradient(45deg, rgb(237, 242, 241), rgb(220, 227, 227) 40%);
+}
+/*
+#expDesc{
     color:red;
     width:100%;
     margin-top: -20px;
     margin-left: 10px;
     margin-bottom: 5px;
-  }
+}*/
 
 .wrap_img img{padding:1%;
     width: 100%;
