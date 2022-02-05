@@ -2,7 +2,7 @@ import React from 'react';
 import './uploader.scss';
 import PropTypes from 'prop-types';
 import { CheckURL } from '../utils';
-import icoBtnLoad from './load.png';
+import icoBtnLoad from './img/load.png';
 import {withRouter} from 'react-router-dom';
 
 class FormLoadImage extends React.PureComponent {
@@ -26,7 +26,7 @@ class FormLoadImage extends React.PureComponent {
     CheckURL(url, this.props.arrExtnsFile)
       .then((data) => {
         if (data === 'img') {
-          this.props.getURL([{ url }], this.state.errorMsg);
+          this.props.getURL([{ url }]);
         }
 
         if (data === 'json') {
@@ -69,7 +69,6 @@ class FormLoadImage extends React.PureComponent {
           />
 
           <button type="submit" className="submitButton" style={{ backgroundImage:`url(${icoBtnLoad})` }}/>
-          
 
           <div id="expDes">
             <span id="expDes_" tabIndex="-1">

@@ -1,14 +1,10 @@
 import React from 'react';
-
 import './image-container.scss';
-
 import PropTypes from 'prop-types';
-
 import Preloader from '../preloader/preloader';
-
 import Popup from '../popup/popup';
-
 import useIntersectionObserver from '../use-intersection-observer';
+import placeholder from './img/placeholder.jpg';
 
 export const  ImageContainer = (props) => {
  
@@ -42,7 +38,7 @@ export const  ImageContainer = (props) => {
           className='placeholder'
           style={{ display:  props.loading ? 'block' : 'none'}}
           alt={item.url}
-          src='placeholder.jpg'
+          src={placeholder}
         /></>
      }
      </div>

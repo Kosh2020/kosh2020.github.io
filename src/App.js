@@ -136,8 +136,7 @@ class App extends React.PureComponent {
         <Header/>
         
           <div className="content" ref={this.ref} style={{ maxWidth: paramsGlr.widthRowMax, minWidth: paramsGlr.widthRowMin }}>
-            WIDTH:{this.state.innerWidth}
-            <h1 className="text">Галерея изображений</h1>
+          <h1 className="title">Галерея изображений</h1>
           <Route exact={true} path='/' render = {() =><> 
             <Uploader getURL={this.getImagesFromURL} arrExtnsFile={arrExtnsFile} />
             <p id="expDesc" tabIndex="-1">

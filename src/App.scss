@@ -8,16 +8,19 @@ $min-width: 320px;
 }
 
 h1{
-    font-weight: 400;
-    font-size: 2.3rem;
-    line-height: 1.1;
-    font-family: Oswald;
-    text-transform: none;
-    text-align: center;
-    margin: 51px auto 0;
-    font-stretch: ultra-condensed;
-    margin: 51px auto 0;
+   font-weight: 400;
+   font-size: 2.3rem;
+   line-height: 1.1;
+   font-family: Oswald;
+   font-stretch: ultra-condensed;
   }
+
+.title{
+   text-transform: none;
+   text-align: center;
+   margin: 0px auto 0;
+   padding-top:51px;
+}
 
 .app-wrapper {
    margin: auto;
@@ -36,4 +39,5 @@ h1{
     color:red;
     width:100%;
     margin-left: 5px;
+    font-size:0.8rem;
 }
