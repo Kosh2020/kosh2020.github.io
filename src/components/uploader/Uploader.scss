@@ -1,89 +1,71 @@
-$width-button:24px;
-$height-button:24px;
+@import './../../variables.scss';
 
- .uploader {
-   padding:5px 5px 5px ;
-   margin: 5px auto 0px auto;
-   font-size:0.8rem !important;
-   max-width: 860px;
-   form{
-     margin: 42px auto 0px;
-     width:100%;
-     position:relative;
-     letter-spacing: 0px;
+.uploader {
+  padding: 5px 5px 5px;
+  margin: 5px auto 0px auto;
+  font-size: $small-font-size;
+  form {
+    margin: 42px auto 0px;
+    width: 100%;
+    position: relative;
+    letter-spacing: 0px;
     white-space: nowrap;
-     input{
-       width:100%;
-       line-height: 1.6;
-       border: 1px solid #b3b3b3;
-       padding: 10px 12px;
-       vertical-align: middle;
-       font: inherit;
-       &:focus {
-         outline: none;
-         -webkit-box-shadow: 0 0 1px 1px #111111;
-         box-shadow: 0 0 1px 1px #111111;
-         border-radius: 3px;
-      }
-
-       &::-webkit-input-placeholder {
-         color: #111111;
-         border-radius: 3px;
-         opacity: 1;
-      }
-       &:-moz-placeholder {
-        /* Firefox 18- */
-         color: #111111;
-         border-radius: 3px;
-         opacity: 1;
-      }
-       &::-moz-placeholder {
-        /* Firefox 19+ */
-         color: #111111;
-         border-radius: 3px;
-         opacity: 1;
-      }
-       &:-ms-input-placeholder {
-         color: #111111;
-         border-radius: 3px;
-         opacity: 1;
-      }
+    
+  }
+  input {
+    width: 100%;
+    line-height: 1.6;
+    border: 1px solid #b3b3b3;
+    padding: 10px 12px;
+    vertical-align: middle;
+    font: inherit;
+    &:focus {
+      outline: none;
+      -webkit-box-shadow: 0 0 1px 1px $text-color;
+      box-shadow: 0 0 1px 1px $text-color;
+      border-radius: 3px;
     }
-     label{
-       margin-right:10px;
-       margin-left:5px;
+    &::-webkit-input-placeholder {
+      color: $text-color;
+      border-radius: 3px;
+      opacity: 1;
     }
-     #expDes{
-       margin-left:5px;      
-       width:100%;       
+    &:-moz-placeholder {
+      /* Firefox 18- */
+      color: $text-color;
+      border-radius: 3px;
+      opacity: 1;
     }
-     #expDes_{
-       color:red;
+    &::-moz-placeholder {
+      /* Firefox 19+ */
+      color: $text-color;
+      border-radius: 3px;
+      opacity: 1;
     }
-     button{
-      position: absolute;
-      right: 5px;
-      top: 30px;
-      width: $width-button;
-      height: $height-button;
-      border: none;
-      background-color: white;
+    &:-ms-input-placeholder {
+      color: $text-color;
+      border-radius: 3px;
+      opacity: 1;
     }
+  }
+  label {
+    margin-right: 10px;
+    margin-left: 5px;
+  }
+  #expDes {
+    margin-left: 5px;
+    width: 100%;
+    #expDes_ {
+      color: $mistake-missage-color;
+    }
+  }
+  button {
+    position: absolute;
+    right: 5px;
+    top: 29px;
+    width: $width-button;
+    height: $height-button;
+    border: none;
+    background-color: white;
   }
 }
-
-@media only screen and (max-width: 575px) {
-  h1{
-    font-size: 1.575rem;
-    width: 340px;
-  }
-  }
-
- @media only screen and (max-width: 425px) {
-   .uploader {
-     form{
-       height: 100px;
-    }
-  }
-}
- 

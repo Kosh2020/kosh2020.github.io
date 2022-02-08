@@ -1,18 +1,15 @@
 import React from 'react';
 import './uploader.scss';
 import PropTypes from 'prop-types';
-import { CheckURL } from '../utils';
+import { CheckURL } from '../utils/utils';
 import icoBtnLoad from './img/load.png';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class FormLoadImage extends React.PureComponent {
   constructor(props) {
     super(props);
-
     this.handleSubmit = this.handleSubmit.bind(this);
-
     this.inputRef = React.createRef();
-
     this.state = {
       errorMsg: '',
     };
@@ -20,9 +17,7 @@ class FormLoadImage extends React.PureComponent {
 
   handleSubmit(event) {
     event.preventDefault();
-
     let url = this.inputRef.current.value;
-
     CheckURL(url, this.props.arrExtnsFile)
       .then((data) => {
         if (data === 'img') {
@@ -32,11 +27,9 @@ class FormLoadImage extends React.PureComponent {
         if (data === 'json') {
           fetch(url)
             .then((res) => res.json())
-
             .then((images) => {
               this.props.getURL(images.images);
             })
-
             .catch(() => {
               this.setState({ errorMsg: 'Error loading file:' + url });
             });
@@ -49,11 +42,8 @@ class FormLoadImage extends React.PureComponent {
   }
 
   render() {
-    console.log('RENDER-UPLOADER');
-
     return (
       <div className="uploader">
-        
         <form onSubmit={this.handleSubmit}>
           <label id="expLabel" htmlFor="imgURL">
             URL:
@@ -68,7 +58,11 @@ class FormLoadImage extends React.PureComponent {
             placeholder="*.json/ *.jpg/ *.jpeg/ *.png"
           />
 
-          <button type="submit" className="submitButton" style={{ backgroundImage:`url(${icoBtnLoad})` }}/>
+          <button
+            type="submit"
+            className="submitButton"
+            style={{ backgroundImage: `url(${icoBtnLoad})` }}
+          />
 
           <div id="expDes">
             <span id="expDes_" tabIndex="-1">

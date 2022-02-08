@@ -1,3 +1,4 @@
+@import './variables.scss';
 @font-face {
   font-family: Oswald;
   src: url(./fonts/Oswaldregular.woff) format('woff');
@@ -11,9 +12,6 @@
   src: url(./fonts/opensans.woff2) format('woff2');
 }
 
-$title-font: Oswald;
-$main-font: OpenSans;
-
 html {
   height: 100%;
   overflow-y: auto;
@@ -24,7 +22,7 @@ html {
 *:before,
 *:after {
   box-sizing: border-box;
-  font-family: opensans, sans-serif, Roboto, Helvetica, Arial;
+  font-family: $font-stack;
 }
 
 * {
@@ -38,8 +36,7 @@ html {
 }
 
 body {
-  font-family: opensans, sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue';
+  font-family: $font-stack;
   color: #111111;
   background: #ffffff;
   height: auto;

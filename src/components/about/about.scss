@@ -1,6 +1,8 @@
-.text{
-  font-family:inherit;
-  font-family: opensans;
-  font-size:0.9rem;
-  margin:30px auto 40px auto;
+@import './../../variables.scss';
+
+.about {
+  font-family: $main-font;
+  font-size: $txt-font-size;
+  padding: 15px;
+  margin: 30px auto 40px auto;
 }

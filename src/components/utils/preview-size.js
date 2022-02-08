@@ -16,21 +16,16 @@ class Image {
   }
 
   get width() {
-    return this._height / this._width < 2 / 3
-      ? (3 * this._height) / 2
-      : this._width;
+    return this._height / this._width < 2 / 3 ? (3 * this._height) / 2 : this._width;
   }
 
   get height() {
-    return this._width / this._height < 2 / 3
-      ? (3 * this._width) / 2
-      : this._height;
+    return this._width / this._height < 2 / 3 ? (3 * this._width) / 2 : this._height;
   }
 
   wPreviewForHeight(height) {
     return (height * this._width) / this._height;
   }
-
 }
 
 class Gallery {
@@ -49,27 +44,19 @@ class Gallery {
   }
 
   get lastRow() {
-    return this.listImages.length > 0
-      ? this.listImages[this.listImages.length - 1].row
-      : 0;
+    return this.listImages.length > 0 ? this.listImages[this.listImages.length - 1].row : 0;
   }
 
   get lastIImg() {
-    return this.listImages.length > 0
-      ? this.listImages[this.listImages.length - 1].i
-      : 0;
+    return this.listImages.length > 0 ? this.listImages[this.listImages.length - 1].i : 0;
   }
 
   get width() {
-    return this._height / this._width < 2 / 3
-      ? (3 * this._height) / 2
-      : this._width;
+    return this._height / this._width < 2 / 3 ? (3 * this._height) / 2 : this._width;
   }
 
   get height() {
-    return this._width / this._height < 2 / 3
-      ? (3 * this._width) / 2
-      : this._height;
+    return this._width / this._height < 2 / 3 ? (3 * this._width) / 2 : this._height;
   }
 
   get imagesOfLastRow() {
@@ -123,14 +110,14 @@ class Gallery {
   }
 
   alignHeightImgsInRow(height) {
-
     if (this.listImages.length > 0) {
       this.listImages.forEach((img) => {
         if (img.row === this.lastRow) {
-        img.h_preview = height; img.w_preview=(height * img.width) / img.height   
-      }})
+          img.h_preview = height;
+          img.w_preview = (height * img.width) / img.height;
+        }
+      });
     }
-
   }
 
   stretchLastRow() {
@@ -142,8 +129,7 @@ class Gallery {
       if (img.row === this.lastRow) {
         img.h_preview = this.heightRowMin * ratio * fudge;
 
-        img.w_preview =
-          ((this.heightRowMin * img.width) / img.height) * ratio * fudge;
+        img.w_preview = ((this.heightRowMin * img.width) / img.height) * ratio * fudge;
       }
     });
   }
@@ -186,11 +172,11 @@ export const PreviewSize = (listImages, img, innerWidth, sett) => {
     width: image.width,
   });
 
-gllr.alignHeightImgsInRow(image.hPreview); 
+  gllr.alignHeightImgsInRow(image.hPreview);
 
   if (
-    gllr.widthLastAllImgsForMinHeight  <= gllr.widthRow &&
-    gllr.widthLastAllImgsForMaxHeight  > gllr.widthRow
+    gllr.widthLastAllImgsForMinHeight <= gllr.widthRow &&
+    gllr.widthLastAllImgsForMaxHeight > gllr.widthRow
   )
     gllr.stretchLastRow();
 

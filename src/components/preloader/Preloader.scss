@@ -1,12 +1,11 @@
-.preloader{
-    background-color: white;
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    font-weight: border;
-    opacity: .3;
-}
-.preloader img{
-    width:150px;
+.preloader {
+  background-color: white;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  img {
+    width: 150px;
+  }
 }

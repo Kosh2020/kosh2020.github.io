@@ -1,43 +1,34 @@
-$max-width: 860px;
-$min-width: 320px;
-
- .App {
-   display: block;
-   width: 100%;
-   margin: auto;
-}
-
-h1{
-   font-weight: 400;
-   font-size: 2.3rem;
-   line-height: 1.1;
-   font-family: Oswald;
-   font-stretch: ultra-condensed;
-  }
-
-.title{
-   text-transform: none;
-   text-align: center;
-   margin: 0px auto 0;
-   padding-top:51px;
-}
+@import './variables.scss';
 
 .app-wrapper {
-   margin: auto;
-   position: relative;
-   width: 100%;
-   height: 100%;
-   margin: auto;
-}
-
-.content {
-   min-height: calc( 100% - 80px - 75px );
-   margin:auto;
-}
-
-#expDesc{
-    color:red;
-    width:100%;
+  margin: auto;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  h1 {
+    font-weight: 400;
+    font-size: 2.3rem;
+    line-height: 1.1;
+    font-family: $title-font;
+    font-stretch: ultra-condensed;
+    @media only screen and (max-width: 575px) {
+      font-size: 1.575rem;
+      width: 320px;
+    }
+  }
+  .title {
+    text-transform: none;
+    text-align: center;
+    margin: 0px auto 0;
+    padding-top: 51px;
+  }
+  .content {
+    min-height: calc(100% - #{$header-hight} - #{$footer-hight} + 5px);
+    margin: auto;
+  }
+  #expDesc {
+    color: $mistake-missage-color;
     margin-left: 5px;
-    font-size:0.8rem;
+    font-size: $small-font-size;
+  }
 }

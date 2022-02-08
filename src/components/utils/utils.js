@@ -24,10 +24,7 @@ export const CheckURL = (url, extnsns) =>
   });
 
 export function GetFileExtension(filename) {
-  return (
-    filename.substring(filename.lastIndexOf('.') + 1, filename.length) ||
-    filename
-  );
+  return filename.substring(filename.lastIndexOf('.') + 1, filename.length) || filename;
 }
 
 export const FileAndImageSize = (url, params) => {
@@ -36,10 +33,7 @@ export const FileAndImageSize = (url, params) => {
       .then((response) => response.blob())
 
       .then((blob) => {
-        if (
-          blob.size > params.minimumFileSize &&
-          blob.size < params.maximumFileSize
-        ) {
+        if (blob.size > params.minimumFileSize && blob.size < params.maximumFileSize) {
           const img = new Image();
 
           img.crossOrigin = 'Anonymous';
@@ -51,18 +45,18 @@ export const FileAndImageSize = (url, params) => {
               img.height > params.heightRowMin &&
               img.height < params.sizeImgMax
             ) {
-              resolve({src:url,width:img.width,height:img.height});
+              resolve({ src: url, width: img.width, height: img.height });
             } else reject(url + '  (incorrect image size)');
           });
 
           img.src = URL.createObjectURL(blob);
 
           img.addEventListener('error', () => {
-            reject(url);
+            reject(url + '  (loading error)');
           });
         } else reject(url + '  (incorrect file size)');
       })
 
       .catch(() => reject(url + '  (loading error)'));
-  })};
-
+  });
+};
