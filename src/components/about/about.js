@@ -34,7 +34,7 @@ const About = () => (
     <br />
     разрешение изображений от: ширина-320px, высота-170px до 2000px по большей стороне.
     <br /> <br />
-    Для сборки: загрузить исходный код c https://github.com/Kosh2020/kosh2020.github.io.git, <br />
+    Для сборки: загрузить исходный код c <a href="https://github.com/Kosh2020/kosh2020.github.io.git" target="_blank"> https://github.com/Kosh2020/kosh2020.github.io.git</a>, <br />
     установить необходимые зависимости через npm install.
   </div>
 );
