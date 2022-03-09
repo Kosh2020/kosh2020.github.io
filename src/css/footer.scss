@@ -1,24 +1,26 @@
-@import './../../variables.scss';
+@import './variables.scss';
 
 .footer {
   background-color: $footer-color;
   height: $footer-hight;
   margin-top: -5px;
   line-height: $footer-hight;
-  .container-footer {
+  .footer-container {
     display: flex;
     margin: auto;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     font-size: $small-font-size;
-    .link-footer {
+    .footer-link {
       color: #adcce9;
       display: inline-block;
       margin-right: 1%;
     }
-    .text-footer {
+    .footer-text {
       color: white;
       display: inline-block;
-      margin-right: 0.3%;
+      margin: 0 0.3% 0 0;
     }
   }
 }

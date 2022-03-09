@@ -1,18 +1,16 @@
-@import './../../variables.scss';
+@import './../../css/variables.scss';
 
-.uploader {
-  padding: 5px 5px 5px;
+.content-uploader {
   margin: 5px auto 0px auto;
   font-size: $small-font-size;
-  form {
+  .uploader-form {
     margin: 42px auto 0px;
     width: 100%;
     position: relative;
     letter-spacing: 0px;
     white-space: nowrap;
-    
   }
-  input {
+  .uploader-input {
     width: 100%;
     line-height: 1.6;
     border: 1px solid #b3b3b3;
@@ -31,13 +29,11 @@
       opacity: 1;
     }
     &:-moz-placeholder {
-      /* Firefox 18- */
       color: $text-color;
       border-radius: 3px;
       opacity: 1;
     }
     &::-moz-placeholder {
-      /* Firefox 19+ */
       color: $text-color;
       border-radius: 3px;
       opacity: 1;
@@ -48,7 +44,8 @@
       opacity: 1;
     }
   }
-  label {
+
+  .uploader-label {
     margin-right: 10px;
     margin-left: 5px;
   }
@@ -59,7 +56,7 @@
       color: $mistake-missage-color;
     }
   }
-  button {
+  .uploader-button {
     position: absolute;
     right: 5px;
     top: 29px;

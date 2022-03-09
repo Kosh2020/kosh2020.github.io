@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import './css/variables.scss';
 @font-face {
   font-family: Oswald;
   src: url(./fonts/Oswaldregular.woff) format('woff');
@@ -22,17 +22,6 @@ html {
 *:before,
 *:after {
   box-sizing: border-box;
-  font-family: $font-stack;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body,
-html {
-  margin: 0;
-  padding: 0;
 }
 
 body {
@@ -44,34 +33,22 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   --effect-scale: 1.1;
-  font-size: 16px;
+  font-size: 0.8rem;
   line-height: 1.6;
 }
 
-body,
-h1,
-p,
-ul[class],
-li,
-figure {
-  margin: 0;
+body {
+  margin:0;
+  padding:0;
 }
 
 #root {
   height: 100%;
 }
 
-ul[class] {
-  list-style: none;
-  padding: 0;
-}
-
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
 img {
   max-width: 100%;
+  max-height: 100%;
   display: block;
 }
 
@@ -105,4 +82,25 @@ input:-internal-autofill-selected {
   background-image: none !important;
   background-color: -internal-light-dark(rgb(232, 240, 254), rgba(70, 90, 126, 0.4)) !important;
   color: -internal-light-dark(black, white) !important;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 2.3rem;
+  line-height: 1.1;
+  font-family: $title-font;
+  font-stretch: ultra-condensed;
+  @media only screen and (max-width: 575px) {
+    font-size: 1.575rem;
+    width: 320px;
+  }
+}
+
+.align-center {
+  margin: 0 auto;  
+}
+
+.img{
+  width:100%;
+  height:100%;
 }

@@ -1,33 +1,29 @@
-@import './../../variables.scss';
+@import './variables.scss';
 
-.header {
+.app-wrapper-header {
   color: $text-color;
-  width: 100%;
-  width: 100%;
   padding: 10px 15px;
   min-height: $header-hight;
-  .container-header {
-    margin: 30px 1% 0 1%;
-    .logo {
-      float: left;
-      margin-top: -18px;
+  padding: 20px 1% 0 1%;
+  .header-logo {
+    float: left;
+    padding-left: 20px;
+    margin-top: -11px;
+  }
+  .header-menu {
+    letter-spacing: 0px;
+    float: right;
+    letter-spacing: 0px;
+    white-space: nowrap;
+    line-height: 1;
+    @media only screen and (max-width: 600px) {
+      display: none;
     }
-    nav {
-      font-family: $main-font;
-      font-size: $small-font-size;
-      letter-spacing: 0px;
-      float: right;
-      letter-spacing: 0px;
-      white-space: nowrap;
-      line-height: 1;
-      @media only screen and (max-width: 991px) {
-        display: none;
-      }
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        li {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
           display: inline-block;
           a {
             color: $text-color;
@@ -43,9 +39,9 @@
         }
       }
     }
-    .hamburger-menu {
+    .header-hamburger-menu {
       display: none;
-      @media only screen and (max-width: 991px) {
+      @media only screen and (max-width: 600px) {
         display: block;
       }
       #menu__toggle {
@@ -53,13 +49,19 @@
         &:checked {
           & ~ .menu__btn {
             & > span {
-              transform: rotate(45deg);
+             -webkit-transform: rotate(45deg); 
+             -ms-transform: rotate(45deg); 
+             transform: rotate(45deg);
               &::before {
                 top: 0;
+                -webkit-transform: rotate(0);
+                -ms-transform: rotate(0);
                 transform: rotate(0);
               }
               &::after {
                 top: 0;
+                -webkit-transform: rotate(90deg);    
+                -ms-transform: rotate(90deg);    
                 transform: rotate(90deg);
               }
             }
@@ -71,10 +73,14 @@
         }
       }
       .menu__btn {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
         position: absolute;
-        top: 28px;
+        top: 33px;
         right: 25px;
         width: 23px;
         cursor: pointer;
@@ -109,6 +115,7 @@
         list-style: none;
         text-align: center;
         background-color: #eceff1;
+        -webkit-box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
         box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
         z-index: 1;
         .menu__item {
@@ -122,25 +129,7 @@
           &:hover {
             background-color: #cfd8dc;
           }
-          /*   &:checked {
-            transform: rotate(45deg);
-          }
-
-           .menu__btn > span
-          &:checked , .menu__btn > span::before {
-            top: 0;
-            transform: rotate(0);
-          }
-          &:checked , .menu__btn > span::after {
-            top: 0;
-            transform: rotate(90deg);
-          }
-          &:checked , .menu__box {
-            visibility: visible;
-            right: 0;
-          }*/
         }
       }
-    }
   }
 }

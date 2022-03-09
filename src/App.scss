@@ -1,34 +1,219 @@
-@import './variables.scss';
+@import './css/variables.scss';
 
 .app-wrapper {
   margin: auto;
   position: relative;
   width: 100%;
   height: 100%;
-  h1 {
-    font-weight: 400;
-    font-size: 2.3rem;
-    line-height: 1.1;
-    font-family: $title-font;
-    font-stretch: ultra-condensed;
-    @media only screen and (max-width: 575px) {
-      font-size: 1.575rem;
-      width: 320px;
-    }
-  }
-  .title {
+
+  .content-title {
     text-transform: none;
     text-align: center;
     margin: 0px auto 0;
     padding-top: 51px;
   }
-  .content {
+  .app-wrapper-content {
     min-height: calc(100% - #{$header-hight} - #{$footer-hight} + 5px);
     margin: auto;
+
+    //===================страница О галереи=================================
+    .about {
+      padding: 15px;
+      margin: 30px auto 40px auto;
+    } 
+    //===================страница Контакты==================================
+    .contact {
+      margin-top: 40px;
+      text-align: center;
+      line-height: 2rem;
+      a {
+        text-decoration: underline;
+        color: #6690b7;
+      }
+    }  
+
+    .preloader {
+      background-color: white;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      opacity: 0.3;
+      .preloader-img {
+        width: 150px;
+      }
+    }  
+
+   .content-errormsg {
+      color: $mistake-missage-color;
+      margin: 7px 0 0 5px;
+      font-size: $small-font-size;
+      width: 100%;
+   }
+
+  .app-wrapper-header {
+    color: $text-color;
+    padding: 10px 15px;
+    min-height: $header-hight;
+    margin: 20px 1% 0 1%;
+    .header-logo {
+      float: left;
+      margin-top: -11px;
+    }
+    //================menu=======================================================
+    .header-menu {
+      letter-spacing: 0px;
+      float: right;
+      letter-spacing: 0px;
+      white-space: nowrap;
+      line-height: 1;
+      @media only screen and (max-width: 600px) {
+        display: none;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          display: inline-block;
+          a {
+            color: $text-color;
+            padding: 10px 20px;
+            text-decoration: none;
+          }
+          a:active {
+            color: #478ac9;
+          }
+          a:focus {
+            color: $active-href-color;
+          }
+        }
+      }
+    }
+    //===================humburger-menu================================
+    .header-hamburger-menu {
+      display: none;
+      @media only screen and (max-width: 600px) {
+        display: block;
+      }
+      #menu__toggle {
+        opacity: 0;
+        &:checked {
+          & ~ .menu__btn {
+            & > span {
+             -webkit-transform: rotate(45deg); 
+             -ms-transform: rotate(45deg); 
+             transform: rotate(45deg);
+              &::before {
+                top: 0;
+                -webkit-transform: rotate(0);
+                -ms-transform: rotate(0);
+                transform: rotate(0);
+              }
+              &::after {
+                top: 0;
+                -webkit-transform: rotate(90deg);    
+                -ms-transform: rotate(90deg);    
+                transform: rotate(90deg);
+              }
+            }
+          }
+          & ~ .menu__box {
+            visibility: visible;
+            right: 0;
+          }
+        }
+      }
+      .menu__btn {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        position: absolute;
+        top: 33px;
+        right: 25px;
+        width: 23px;
+        cursor: pointer;
+        z-index: 2;
+        span,
+        span::before,
+        span::after {
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 4px;
+          background-color: #616161;
+        }
+        span::before {
+          content: '';
+          top: -9px;
+        }
+        span::after {
+          content: '';
+          top: 9px;
+        }
+      }
+      .menu__box {
+        display: block;
+        position: absolute;
+        visibility: hidden;
+        top: 0;
+        width: 300px;
+        height: 100%;
+        margin: 0;
+        padding: 80px 0;
+        list-style: none;
+        text-align: center;
+        background-color: #eceff1;
+        -webkit-box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        .menu__item {
+          display: block;
+          padding: 12px 24px;
+          color: #333;
+          font-family: Open-sens, sans-serif;
+          font-size: 20px;
+          font-weight: 600;
+          list-style-type: none;
+          &:hover {
+            background-color: #cfd8dc;
+          }
+        }
+      }
+    }
   }
-  #expDesc {
-    color: $mistake-missage-color;
-    margin-left: 5px;
-    font-size: $small-font-size;
+  //====================footer=========================
+  .footer {
+    background-color: $footer-color;
+    height: $footer-hight;
+    margin-top: -5px;
+    line-height: $footer-hight;
+    .footer-container {
+      display: flex;
+      margin: auto;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      font-size: $small-font-size;
+      .footer-link {
+        color: #adcce9;
+        display: inline-block;
+        margin-right: 1%;
+      }
+      .footer-text {
+        color: white;
+        display: inline-block;
+        margin: 0 0.3% 0 0;
+      }
+    }
   }
+  //==========
+ 
+  }
+
 }
